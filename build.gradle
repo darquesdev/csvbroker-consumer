@@ -1,0 +1,118 @@
+buildscript {
+    ext {
+        springBootVersion = '1.5.10.RELEASE'
+    }
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'java-library'
+apply plugin: "io.spring.dependency-management"
+apply plugin: 'maven'
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+sourceCompatibility = '1.7'
+targetCompatibility = '1.7'
+version = '0.1.0'
+
+jar {
+    manifest {
+        attributes('Implementation-Title': project.name, 'Implementation-Version': project.version)
+    }
+}
+
+ext{
+    //http://cxf.apache.org/faq.html#FAQ-CanCXFrunwithJDK1.7/Java7?
+    // CXF 3.2 no longer supports Java 7 and requires Java 8 or newer.
+    // Users are strongly encouraged to start moving to Java 8.
+    cxfVersion = '3.1.14'
+}
+
+configurations {
+    jaxws
+}
+
+dependencies {
+
+    api group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+    api group: 'org.apache.cxf', name: 'cxf-rt-frontend-jaxws', version: cxfVersion
+    api group: 'org.apache.cxf', name: 'cxf-rt-transports-http', version: cxfVersion
+    api group: 'org.apache.cxf', name: 'cxf-rt-ws-security', version: cxfVersion
+
+    implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+    implementation group: 'com.google.guava', name: 'guava', version: '23.6-jre'
+
+    testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '1.5.9.RELEASE'
+    testImplementation group: 'commons-codec', name: 'commons-codec', version: '1.11'
+
+    jaxws 'com.sun.xml.ws:jaxws-tools:2.3.0'
+}
+
+task createPom {
+    //https://gist.github.com/jmruc/5852692
+    //https://docs.gradle.org/current/userguide/maven_plugin.html
+    doLast{
+        pom {
+            //noinspection GroovyAssignabilityCheck
+            project {
+
+                groupId 'es.gob.csvstorage'
+                artifactId 'csvstorage-consumer'
+                version "${version}"
+
+                inceptionYear '2018'
+                licenses {
+                    license {
+                        name 'LICENCIA PÚBLICA DE LA UNIÓN EUROPEA v. 1.2'
+                        url 'https://joinup.ec.europa.eu/sites/default/files/inline-files/EUPL%20v1_2%20ES.txt'
+                    }
+                }
+            }
+        }.writeTo("$buildDir/libs/pom.xml")
+    }
+}
+build.finalizedBy(createPom)
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.4'
+}
+
+
+task wsimport {
+
+    ext.destDir = file("src/gen/java")
+    outputs.dir destDir
+    doLast {//noinspection GroovyAssignabilityCheck
+
+        def wsNames = ['CSVValidationService', 'CSVValidationWSService', 'CSVValidationCertificateService']
+        wsNames.forEach{
+            ext.wsdlSrc = file("src/main/resources/wsdl/${it}.wsdl")
+            ext.bindingSrc = file("src/main/resources/wsdl/${it}-binding.xml")
+            ant {
+                destDir.mkdirs()
+                taskdef(name: 'wsimport',
+                        classname: 'com.sun.tools.ws.ant.WsImport',
+                        classpath: configurations.jaxws.asPath)
+                wsimport(keep: true,
+                        package: 'es.gob.csvbroker.consumer.ws.model',
+                        xnocompile: true,
+                        quiet: true,
+                        sourcedestdir: destDir,
+                        wsdl: wsdlSrc,
+                        binding: bindingSrc,
+                        encoding: "UTF-8"
+                )
+            }
+        }
+    }
+}

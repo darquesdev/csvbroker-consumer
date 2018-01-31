@@ -1,0 +1,225 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="urn:es:gob:aapp:csvbroker:webservices:validation:v1.0" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="urn:es:gob:aapp:csvbroker:webservices:validation:model:v1.0" name="CSVValidationService" targetNamespace="urn:es:gob:aapp:csvbroker:webservices:validation:v1.0">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:es:gob:aapp:csvbroker:webservices:validation:v1.0" xmlns:ns1="urn:es:gob:aapp:csvbroker:webservices:validation:model:v1.0" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="urn:es:gob:aapp:csvbroker:webservices:validation:v1.0">
+  <xs:import namespace="urn:es:gob:aapp:csvbroker:webservices:validation:model:v1.0"/>
+  <xs:element name="csvValidation" type="tns:csvValidation"/>
+  <xs:element name="csvValidationResponse" type="tns:csvValidationResponse"/>
+  <xs:element name="csvValidationSecurity" type="tns:csvValidationSecurity"/>
+  <xs:element name="csvValidationSecurityResponse" type="tns:csvValidationSecurityResponse"/>
+  <xs:complexType name="csvValidation">
+    <xs:sequence>
+      <xs:element name="credential" type="ns1:WSCredential"/>
+      <xs:element name="validationRequest" type="ns1:CSVValidationRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="csvValidationResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" ref="ns1:CSVValidationResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="csvValidationSecurity">
+    <xs:sequence>
+      <xs:element name="credential" type="ns1:WSCredential"/>
+      <xs:element name="validationSecurityRequest" type="ns1:CSVValidationSecurityRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="csvValidationSecurityResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" ref="ns1:CSVValidationSecurityResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="tipoIdentificacion">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CLAVE_PERM"/>
+      <xs:enumeration value="PIN24"/>
+      <xs:enumeration value="DNIE"/>
+      <xs:enumeration value="PF_2CA"/>
+      <xs:enumeration value="PJ_2CA"/>
+      <xs:enumeration value="COMPONENTESSL"/>
+      <xs:enumeration value="SEDE_ELECTRONICA"/>
+      <xs:enumeration value="SELLO_ORGANO"/>
+      <xs:enumeration value="EMPLEADO_PUBLICO"/>
+      <xs:enumeration value="ENTIDAD_NO_PERSONA_JURIDICA"/>
+      <xs:enumeration value="EMPLEADO_PUBLICO_PSEUD"/>
+      <xs:enumeration value="CUALIFICADO_SELLO_ENTIDAD"/>
+      <xs:enumeration value="CUALIFICADO_AUTENTICACION"/>
+      <xs:enumeration value="CUALIFICADO_SELLO_TIEMPO"/>
+      <xs:enumeration value="REPRESENTACION_PJ"/>
+      <xs:enumeration value="REPRESENTACION_ENTIDAD_SIN_PF"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="recuperacionOriginal">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="S"/>
+      <xs:enumeration value="N"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="documentoEni">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="S"/>
+      <xs:enumeration value="N"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:es:gob:aapp:csvbroker:webservices:validation:model:v1.0" xmlns:ns1="urn:es:gob:aapp:csvbroker:webservices:validation:v1.0" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="urn:es:gob:aapp:csvbroker:webservices:validation:model:v1.0">
+  <xs:import namespace="urn:es:gob:aapp:csvbroker:webservices:validation:v1.0"/>
+  <xs:element name="CSVValidationException" nillable="true">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="code" type="xs:string"/>
+        <xs:element name="description" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CSVValidationResponse" type="tns:CSVValidationResponse"/>
+  <xs:element name="CSVValidationSecurityResponse" type="tns:CSVValidationSecurityResponse"/>
+  <xs:complexType name="WSCredential">
+    <xs:sequence>
+      <xs:element name="idaplicacion" type="xs:string"/>
+      <xs:element name="password" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CSVValidationRequest">
+    <xs:sequence>
+      <xs:element name="csv" type="xs:string"/>
+      <xs:element minOccurs="0" name="procedureList" type="tns:procedureList"/>
+      <xs:element minOccurs="0" name="organizationList" type="tns:organizationList"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="procedureList">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="procedureCode" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="organizationList">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="organization" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CSVValidationResponse">
+    <xs:sequence>
+      <xs:element name="code" type="xs:string"/>
+      <xs:element name="description" type="xs:string"/>
+      <xs:element minOccurs="0" name="documentResponse" type="tns:documentResponse"/>
+      <xs:element minOccurs="0" name="organizationResponse" type="tns:organizationResponse"/>
+      <xs:element minOccurs="0" name="waitResponse" type="tns:waitResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="documentResponse">
+    <xs:sequence>
+      <xs:element name="content" type="xs:base64Binary"/>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="mime" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="organizationResponse">
+    <xs:sequence>
+      <xs:element name="organizationList" type="tns:organizationList"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="waitResponse">
+    <xs:sequence>
+      <xs:element name="secondsToWait" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CSVValidationSecurityRequest">
+    <xs:sequence>
+      <xs:element name="csv" type="xs:string"/>
+      <xs:element minOccurs="0" name="organizationList" type="tns:organizationList"/>
+      <xs:element minOccurs="0" name="nif" type="xs:string"/>
+      <xs:element minOccurs="0" name="tipoIdentificacion" type="ns1:tipoIdentificacion"/>
+      <xs:element minOccurs="0" name="recuperacion_original" type="ns1:recuperacionOriginal"/>
+      <xs:element minOccurs="0" name="documento_eni" type="ns1:documentoEni"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CSVValidationSecurityResponse">
+    <xs:sequence>
+      <xs:element name="code" type="xs:string"/>
+      <xs:element name="description" type="xs:string"/>
+      <xs:element minOccurs="0" name="documentUrlResponse" type="tns:documentUrlResponse"/>
+      <xs:element minOccurs="0" name="organizationResponse" type="tns:organizationResponse"/>
+      <xs:element minOccurs="0" name="waitResponse" type="tns:waitResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="documentUrlResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="content" type="xs:base64Binary"/>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="mime" type="xs:string"/>
+      <xs:element minOccurs="0" name="url" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="errorInfo" nillable="true"/>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="CSVValidationException">
+    <wsdl:part element="ns1:errorInfo" name="CSVValidationException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="csvValidationSecurityResponse">
+    <wsdl:part element="tns:csvValidationSecurityResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="csvValidationSecurity">
+    <wsdl:part element="tns:csvValidationSecurity" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="csvValidationResponse">
+    <wsdl:part element="tns:csvValidationResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="csvValidation">
+    <wsdl:part element="tns:csvValidation" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="CSVValidationService">
+    <wsdl:operation name="csvValidation">
+      <wsdl:input message="tns:csvValidation" name="csvValidation">
+    </wsdl:input>
+      <wsdl:output message="tns:csvValidationResponse" name="csvValidationResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:CSVValidationException" name="CSVValidationException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="csvValidationSecurity">
+      <wsdl:input message="tns:csvValidationSecurity" name="csvValidationSecurity">
+    </wsdl:input>
+      <wsdl:output message="tns:csvValidationSecurityResponse" name="csvValidationSecurityResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:CSVValidationException" name="CSVValidationException">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CSVValidationServiceSoapBinding" type="tns:CSVValidationService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="csvValidation">
+      <soap:operation soapAction="urn:csvValidation" style="document"/>
+      <wsdl:input name="csvValidation">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="csvValidationResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="CSVValidationException">
+        <soap:fault name="CSVValidationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="csvValidationSecurity">
+      <soap:operation soapAction="urn:csvValidationSecurity" style="document"/>
+      <wsdl:input name="csvValidationSecurity">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="csvValidationSecurityResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="CSVValidationException">
+        <soap:fault name="CSVValidationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CSVValidationService">
+    <wsdl:port binding="tns:CSVValidationServiceSoapBinding" name="CSVValidationServicePort">
+      <soap:address location="https://csvbroker.redsara.es/csvbroker/services/CSVValidationService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
