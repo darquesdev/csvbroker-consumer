@@ -30,7 +30,6 @@ jar {
         attributes('Implementation-Title': project.name, 'Implementation-Version': project.version)
     }
 }
-
 ext{
     //http://cxf.apache.org/faq.html#FAQ-CanCXFrunwithJDK1.7/Java7?
     // CXF 3.2 no longer supports Java 7 and requires Java 8 or newer.
@@ -50,7 +49,6 @@ dependencies {
     api group: 'org.apache.cxf', name: 'cxf-rt-ws-security', version: cxfVersion
 
     implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
-    implementation group: 'com.google.guava', name: 'guava', version: '23.6-jre'
 
     testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '1.5.9.RELEASE'
     testImplementation group: 'commons-codec', name: 'commons-codec', version: '1.11'

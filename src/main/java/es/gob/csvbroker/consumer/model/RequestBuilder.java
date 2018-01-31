@@ -17,13 +17,9 @@ public final class RequestBuilder {
     private boolean recuperacionOriginal = false;
     private boolean documentoEni = false;
 
-    private RequestBuilder(String csv) {
+    RequestBuilder(String csv) {
         checkArgument(!isNullOrEmpty(csv), "CSV es obligatorio");
         this.csv = csv;
-    }
-
-    public static RequestBuilder consultarCsvRequest(String csv) {
-        return new RequestBuilder(csv);
     }
 
     public RequestBuilder withUnidadesDir3(String... unidadesDir3) {

@@ -8,6 +8,45 @@ import java.util.Objects;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Strings.isNullOrEmpty;
 
+/*
+ *
+    Además del csv y organizationList también contiene los siguientes campos:
+
+    tipoIdentificacion: Tipo con el que se ha identificado el usuario (*).
+
+    nif: NIF del usuario.
+
+    recuperación_original: Si viene informado este campo deberá que venir con el valor ‘S’. En
+        este caso, si el csv pertenece a un documento copia y el campo recuperación_original es “S”
+        indica que se desea recuperarán el documento original de la copia. En caso de no venir informado
+        se devuelve el documento perteneciente al csv.
+
+    documento_eni: Si viene informado este campo tendrá que venir con el valor ‘S’. En este caso, si
+        un csv está asociado a un documento ENI y un PDF, si el documento_eni es “S” indica que se
+        desea recuperar el documento ENI.
+        Si el csv no pertenece a un documento ENI, aunque este campo tenga valor “S” devolverá el PDF.
+        En caso de venir informado a “N” o no venir informado, por defecto se devolverá el PDF.
+
+    (*) Tipos de Identificación permitidos:
+        CLAVE_PERM : Identificación por Clave
+        PIN24 : PIN24
+        DNIE: DNI-Electrónico
+        PF_2CA: Persona Física 2CA
+        PJ_2CA: Persona Jurídica 2CA
+        COMPONENTESSL: Componente SSL
+        SEDE_ELECTRONICA: Sede Electrónica
+        SELLO_ORGANO: Sello Órgano
+        EMPLEADO_PUBLICO: Empleado público
+        ENTIDAD_NO_PERSONA_JURIDICA: Entidad No Persona Jurídica
+        EMPLEADO_PUBLICO_PSEUD: Empleado Público Pseudónimo
+        CUALIFICADO_SELLO_ENTIDAD: Cualificado Sello Entidad
+        CUALIFICADO_AUTENTICACION: Cualificado Autenticación
+        CUALIFICADO_SELLO_TIEMPO: Cualificado Sello Tiempo
+        REPRESENTACION_PJ: Representación Persona Jurídica
+        REPRESENTACION_ENTIDAD_SIN_PF: Representación Entidad Sin Persona Jurídica
+ *
+ *
+**/
 public class ConsultarCsvRequest {
 
     private final String csv;
@@ -27,6 +66,10 @@ public class ConsultarCsvRequest {
         this.identificacion = identificacion;
         this.recuperacionOriginal = recuperacionOriginal;
         this.documentoEni = documentoEni;
+    }
+
+    public static RequestBuilder builder(String csv){
+        return new RequestBuilder(csv);
     }
 
     public String getCsv() {

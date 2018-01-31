@@ -46,19 +46,23 @@ public class ConsultarCsvResponse {
 
     public static final String COD_EXITO = "0";
 
-    private final String code;
+    private final String codigo;
     private final String description;
     private final Documento documento;
     private final List<String> unidadesDir3;
     private final Long segundosEsperaReintento;
 
-    public ConsultarCsvResponse(String code, String description, Documento documento, List<String> unidadesDir3, Long segundosEsperaReintento) {
-        this.code = code;
+    public ConsultarCsvResponse(String codigo, String description, Documento documento, List<String> unidadesDir3, Long segundosEsperaReintento) {
+        this.codigo = codigo;
         this.description = description;
         this.documento = documento;
         this.unidadesDir3 = unidadesDir3 == null ? new ArrayList<>() : unidadesDir3;
         this.segundosEsperaReintento = segundosEsperaReintento == null ? 0 : segundosEsperaReintento;
         checkArgument(this.segundosEsperaReintento >= 0, "Los segundos de espera deben ser igual o mayores que 0");
+    }
+
+    public static ResponseBuilder builder(){
+        return new ResponseBuilder();
     }
 
     /**
@@ -67,7 +71,7 @@ public class ConsultarCsvResponse {
      * @return éxito
      */
     public boolean successful(){
-        return COD_EXITO.equals(code);
+        return COD_EXITO.equals(codigo);
     }
 
     /**
@@ -75,8 +79,8 @@ public class ConsultarCsvResponse {
      *
      * @return código
      */
-    public String getCode() {
-        return code;
+    public String getCodigo() {
+        return codigo;
     }
 
     /**
