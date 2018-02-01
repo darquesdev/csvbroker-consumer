@@ -8,3 +8,5 @@ build/
 \.gradle/
 
 out/
+
+\.settings/gradle/org\.springsource\.ide\.eclipse\.gradle\.core\.prefs

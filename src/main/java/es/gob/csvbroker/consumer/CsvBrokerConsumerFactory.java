@@ -11,4 +11,12 @@ public final class CsvBrokerConsumerFactory {
     public static CsvBrokerConsumer createConsumerByCredentials(Properties properties) {
         return new ConsumerByCredentials(properties);
     }
+
+    public static CsvBrokerConsumer createConsumerByUsernameToken(Properties properties) {
+        return new ConsumerByUsernameToken(properties);
+    }
+
+    public static CsvBrokerConsumer createConsumerByCertificate(Properties properties) {
+        return new ConsumerByCertificate(properties);
+    }
 }

@@ -14,9 +14,9 @@ import java.util.Properties;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
-public class CsvBrokerConsumerTest {
+public class ConsumerByCertificateTest {
 
     private CsvBrokerConsumer consumer;
 
@@ -24,18 +24,18 @@ public class CsvBrokerConsumerTest {
     public ExpectedException exception = ExpectedException.none();
 
     private void createConsumerWithValidCredentials() throws IOException {
-        InputStream inputProperties = this.getClass().getResourceAsStream("/csvbroker-credentials.properties");
+        InputStream inputProperties = this.getClass().getResourceAsStream("/csvbroker-certificate.properties");
         Properties properties = new Properties();
         properties.load(inputProperties);
-        this.consumer = CsvBrokerConsumerFactory.createConsumerByCredentials(properties);
+        this.consumer = CsvBrokerConsumerFactory.createConsumerByCertificate(properties);
     }
 
     private void createConsumerWithInvalidCredentials() throws IOException {
-        InputStream inputProperties = this.getClass().getResourceAsStream("/csvbroker-credentials.properties");
+        InputStream inputProperties = this.getClass().getResourceAsStream("/csvbroker-certificate.properties");
         Properties properties = new Properties();
         properties.load(inputProperties);
         properties.setProperty(ConsumerProperties.USER_PARAM, "XXX");
-        this.consumer = CsvBrokerConsumerFactory.createConsumerByCredentials(properties);
+        this.consumer = CsvBrokerConsumerFactory.createConsumerByCertificate(properties);
     }
 
     @Test
