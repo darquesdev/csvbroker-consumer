@@ -12,6 +12,7 @@ public final class ResponseBuilder {
     private String mime;
     private String url;
     private byte[] content;
+    private boolean documentInitialized = false;
 
     protected ResponseBuilder() {
     }
@@ -26,25 +27,12 @@ public final class ResponseBuilder {
         return this;
     }
 
-    public ResponseBuilder withDocumento(String name, String mime, String url) {
-        this.name = name;
-        this.mime = mime;
-        this.url = url;
-        return this;
-    }
-
-    public ResponseBuilder withDocumento(Documento documento) {
-        this.name = documento.getName();
-        this.mime = documento.getMime();
-        this.url = documento.getUrl();
-        this.content = documento.getContent();
-        return this;
-    }
-
-    public ResponseBuilder withDocumento(String name, String mime, byte[] content) {
+    public ResponseBuilder withDocumento(String name, String mime, byte[] content, String url) {
         this.name = name;
         this.mime = mime;
         this.content = content;
+        this.url = url;
+        this.documentInitialized = true;
         return this;
     }
 
@@ -59,6 +47,11 @@ public final class ResponseBuilder {
     }
 
     public ConsultarCsvResponse build() {
-        return new ConsultarCsvResponse(code, description, new Documento(name, mime, url, content), unidadesDir3, segundosEsperaReintento);
+        return new ConsultarCsvResponse(
+                code,
+                description,
+                documentInitialized ? new Documento(name, mime, url, content) : null,
+                unidadesDir3,
+                segundosEsperaReintento);
     }
 }

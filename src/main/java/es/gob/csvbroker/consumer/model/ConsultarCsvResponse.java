@@ -1,10 +1,11 @@
 
 package es.gob.csvbroker.consumer.model;
 
+import es.gob.csvbroker.consumer.util.Assert;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.google.common.base.Preconditions.checkArgument;
 /**
  *
  code: Código para indicar el resultado de la operación. Los valores que se deben
@@ -58,7 +59,7 @@ public class ConsultarCsvResponse {
         this.documento = documento;
         this.unidadesDir3 = unidadesDir3 == null ? new ArrayList<>() : unidadesDir3;
         this.segundosEsperaReintento = segundosEsperaReintento == null ? 0 : segundosEsperaReintento;
-        checkArgument(this.segundosEsperaReintento >= 0, "Los segundos de espera deben ser igual o mayores que 0");
+        Assert.isTrue(this.segundosEsperaReintento >= 0, "Los segundos de espera deben ser igual o mayores que 0");
     }
 
     public static ResponseBuilder builder(){

@@ -1,11 +1,10 @@
 package es.gob.csvbroker.consumer.model;
 
+import es.gob.csvbroker.consumer.util.Assert;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Strings.isNullOrEmpty;
 
 public final class RequestBuilder {
 
@@ -18,7 +17,7 @@ public final class RequestBuilder {
     private boolean documentoEni = false;
 
     RequestBuilder(String csv) {
-        checkArgument(!isNullOrEmpty(csv), "CSV es obligatorio");
+        Assert.hasText(csv, "CSV es obligatorio");
         this.csv = csv;
     }
 

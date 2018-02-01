@@ -17,6 +17,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
+ *         &lt;element name="credential" type="{urn:es:gob:aapp:csvbroker:webservices:validation:model:v1.0}WSCredential"/&gt;
  *         &lt;element name="validationRequest" type="{urn:es:gob:aapp:csvbroker:webservices:validation:model:v1.0}CSVValidationRequest"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
@@ -28,12 +29,39 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "csvValidation", namespace = "urn:es:gob:aapp:csvbroker:webservices:validation:v1.0", propOrder = {
+    "credential",
     "validationRequest"
 })
 public class CsvValidation {
 
     @XmlElement(required = true)
+    protected WSCredential credential;
+    @XmlElement(required = true)
     protected CSVValidationRequest validationRequest;
+
+    /**
+     * Obtiene el valor de la propiedad credential.
+     * 
+     * @return
+     *     possible object is
+     *     {@link WSCredential }
+     *     
+     */
+    public WSCredential getCredential() {
+        return credential;
+    }
+
+    /**
+     * Define el valor de la propiedad credential.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link WSCredential }
+     *     
+     */
+    public void setCredential(WSCredential value) {
+        this.credential = value;
+    }
 
     /**
      * Obtiene el valor de la propiedad validationRequest.

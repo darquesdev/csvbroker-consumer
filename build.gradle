@@ -92,7 +92,7 @@ task wsimport {
     outputs.dir destDir
     doLast {//noinspection GroovyAssignabilityCheck
 
-        def wsNames = ['CSVValidationService', 'CSVValidationWSService', 'CSVValidationCertificateService']
+        def wsNames = ['CSVValidationService']
         wsNames.forEach{
             ext.wsdlSrc = file("src/main/resources/wsdl/${it}.wsdl")
             ext.bindingSrc = file("src/main/resources/wsdl/${it}-binding.xml")

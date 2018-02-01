@@ -1,12 +1,11 @@
 
 package es.gob.csvbroker.consumer.model;
 
+import es.gob.csvbroker.consumer.util.Assert;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Strings.isNullOrEmpty;
 
 /*
  *
@@ -58,7 +57,7 @@ public class ConsultarCsvRequest {
     private final boolean documentoEni;
 
     public ConsultarCsvRequest(String csv, List<String> unidadesDir3, List<String> codigosSia, String nif, Identificacion identificacion, boolean recuperacionOriginal, boolean documentoEni) {
-        checkArgument(isNullOrEmpty(csv), "CSV es obligatorio");
+        Assert.hasText(csv, "CSV es obligatorio");
         this.csv = csv;
         this.unidadesDir3 = unidadesDir3 == null ? new ArrayList<>() : unidadesDir3;
         this.codigosSia = codigosSia == null ? new ArrayList<>() : codigosSia;

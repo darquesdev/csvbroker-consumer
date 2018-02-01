@@ -97,6 +97,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link WSCredential }
+     * 
+     */
+    public WSCredential createWSCredential() {
+        return new WSCredential();
+    }
+
+    /**
      * Create an instance of {@link CSVValidationRequest }
      * 
      */

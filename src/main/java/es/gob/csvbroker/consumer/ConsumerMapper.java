@@ -2,7 +2,6 @@ package es.gob.csvbroker.consumer;
 
 import es.gob.csvbroker.consumer.model.ConsultarCsvRequest;
 import es.gob.csvbroker.consumer.model.ConsultarCsvResponse;
-import es.gob.csvbroker.consumer.model.Documento;
 import es.gob.csvbroker.consumer.model.ResponseBuilder;
 import es.gob.csvbroker.consumer.ws.model.*;
 
@@ -32,10 +31,10 @@ class ConsumerMapper {
                         ? new ArrayList<>()
                         : wsResponse.getOrganizationResponse().getOrganizationList().getOrganization()));
         if(wsResponse.getDocumentUrlResponse() != null){
-            responseBuilder.withDocumento(new Documento(wsResponse.getDocumentUrlResponse().getName(),
+            responseBuilder.withDocumento(wsResponse.getDocumentUrlResponse().getName(),
                     wsResponse.getDocumentUrlResponse().getMime(),
-                    wsResponse.getDocumentUrlResponse().getUrl(),
-                    wsResponse.getDocumentUrlResponse().getContent()));
+                    wsResponse.getDocumentUrlResponse().getContent(),
+                    wsResponse.getDocumentUrlResponse().getUrl());
         }
         return responseBuilder.build();
     }
