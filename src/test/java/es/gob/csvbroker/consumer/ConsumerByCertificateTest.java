@@ -57,7 +57,7 @@ public class ConsumerByCertificateTest {
         createConsumerWithInvalidCredentials();
 
         exception.expect(CsvBrokerConsumerException.class);
-        exception.expectMessage("Credenciales Erroneas");
+        exception.expectMessage("Security processing failed");
 
         ConsultarCsvResponse response = consumer.consultarCsv(ConsultarCsvRequest.builder("PRU-whatever").build());
 

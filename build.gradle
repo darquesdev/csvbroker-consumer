@@ -64,8 +64,8 @@ task createPom {
             //noinspection GroovyAssignabilityCheck
             project {
 
-                groupId 'es.gob.csvstorage'
-                artifactId 'csvstorage-consumer'
+                groupId 'es.gob.csvbroker'
+                artifactId 'csvbroker-consumer'
                 version "${version}"
 
                 inceptionYear '2018'

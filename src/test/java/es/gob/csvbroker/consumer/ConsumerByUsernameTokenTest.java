@@ -57,7 +57,7 @@ public class ConsumerByUsernameTokenTest {
         createConsumerWithInvalidCredentials();
 
         exception.expect(CsvBrokerConsumerException.class);
-        exception.expectMessage("Credenciales Erroneas");
+        exception.expectMessage("A security error was encountered when verifying the message");
 
         ConsultarCsvResponse response = consumer.consultarCsv(ConsultarCsvRequest.builder("PRU-whatever").build());
 
