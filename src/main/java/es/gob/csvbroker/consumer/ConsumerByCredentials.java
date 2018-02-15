@@ -2,8 +2,8 @@ package es.gob.csvbroker.consumer;
 
 import es.gob.csvbroker.consumer.model.ConsultarCsvRequest;
 import es.gob.csvbroker.consumer.model.ConsultarCsvResponse;
-import es.gob.csvbroker.consumer.ws.CSVValidationService;
-import es.gob.csvbroker.consumer.ws.model.CsvBrokerConsumerException;
+import es.gob.csvbroker.consumer.model.CsvBrokerConsumerException;
+import es.gob.csvbroker.consumer.ws.model.CSVValidationService;
 import es.gob.csvbroker.consumer.ws.model.WSCredential;
 import org.apache.cxf.frontend.ClientProxy;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;

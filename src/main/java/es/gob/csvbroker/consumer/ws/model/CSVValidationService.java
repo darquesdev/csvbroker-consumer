@@ -1,7 +1,5 @@
 
-package es.gob.csvbroker.consumer.ws;
-
-import es.gob.csvbroker.consumer.ws.model.*;
+package es.gob.csvbroker.consumer.ws.model;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -18,15 +16,16 @@ import javax.xml.ws.ResponseWrapper;
  * Generated source version: 2.2
  * 
  */
-@WebService(name = "CSVValidationCertificateService", targetNamespace = "urn:es:gob:aapp:csvbroker:webservices:validation:v1.0")
+@WebService(name = "CSVValidationService", targetNamespace = "urn:es:gob:aapp:csvbroker:webservices:validation:v1.0")
 @XmlSeeAlso({
     ObjectFactory.class
 })
-public interface CSVValidationCertificateService {
+public interface CSVValidationService {
 
 
     /**
      * 
+     * @param credential
      * @param validationRequest
      * @return
      *     returns es.gob.csvbroker.consumer.ws.model.CSVValidationResponse
@@ -37,13 +36,16 @@ public interface CSVValidationCertificateService {
     @RequestWrapper(localName = "csvValidation", targetNamespace = "urn:es:gob:aapp:csvbroker:webservices:validation:v1.0", className = "es.gob.csvbroker.consumer.ws.model.CsvValidation")
     @ResponseWrapper(localName = "csvValidationResponse", targetNamespace = "urn:es:gob:aapp:csvbroker:webservices:validation:v1.0", className = "es.gob.csvbroker.consumer.ws.model.CsvValidationResponse")
     public CSVValidationResponse csvValidation(
+        @WebParam(name = "credential", targetNamespace = "")
+        WSCredential credential,
         @WebParam(name = "validationRequest", targetNamespace = "")
-                CSVValidationRequest validationRequest)
+        CSVValidationRequest validationRequest)
         throws CSVValidationException_Exception
     ;
 
     /**
      * 
+     * @param credential
      * @param validationSecurityRequest
      * @return
      *     returns es.gob.csvbroker.consumer.ws.model.CSVValidationSecurityResponse
@@ -54,6 +56,8 @@ public interface CSVValidationCertificateService {
     @RequestWrapper(localName = "csvValidationSecurity", targetNamespace = "urn:es:gob:aapp:csvbroker:webservices:validation:v1.0", className = "es.gob.csvbroker.consumer.ws.model.CsvValidationSecurity")
     @ResponseWrapper(localName = "csvValidationSecurityResponse", targetNamespace = "urn:es:gob:aapp:csvbroker:webservices:validation:v1.0", className = "es.gob.csvbroker.consumer.ws.model.CsvValidationSecurityResponse")
     public CSVValidationSecurityResponse csvValidationSecurity(
+        @WebParam(name = "credential", targetNamespace = "")
+        WSCredential credential,
         @WebParam(name = "validationSecurityRequest", targetNamespace = "")
         CSVValidationSecurityRequest validationSecurityRequest)
         throws CSVValidationException_Exception

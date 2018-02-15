@@ -88,11 +88,13 @@ task wrapper(type: Wrapper) {
 
 task wsimport {
 
-    ext.destDir = file("src/gen/java")
+    ext.destDir = file("src/main/java")
+    ext.destPackage = 'es.gob.csvbroker.consumer.ws.model'
     outputs.dir destDir
     doLast {//noinspection GroovyAssignabilityCheck
 
-        def wsNames = ['CSVValidationService']
+        def wsNames = ['CSVValidationWSService','CSVValidationCertificateService', 'CSVValidationService']
+        
         wsNames.forEach{
             ext.wsdlSrc = file("src/main/resources/wsdl/${it}.wsdl")
             ext.bindingSrc = file("src/main/resources/wsdl/${it}-binding.xml")
@@ -102,7 +104,7 @@ task wsimport {
                         classname: 'com.sun.tools.ws.ant.WsImport',
                         classpath: configurations.jaxws.asPath)
                 wsimport(keep: true,
-                        package: 'es.gob.csvbroker.consumer.ws.model',
+                        package: destPackage,
                         xnocompile: true,
                         quiet: true,
                         sourcedestdir: destDir,

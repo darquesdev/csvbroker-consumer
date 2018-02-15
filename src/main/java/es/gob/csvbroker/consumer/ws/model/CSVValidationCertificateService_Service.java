@@ -1,8 +1,6 @@
 
 package es.gob.csvbroker.consumer.ws.model;
 
-import es.gob.csvbroker.consumer.ws.CSVValidationCertificateService;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import javax.xml.namespace.QName;

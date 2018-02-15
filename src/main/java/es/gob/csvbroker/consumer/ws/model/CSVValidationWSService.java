@@ -1,7 +1,5 @@
 
-package es.gob.csvbroker.consumer.ws;
-
-import es.gob.csvbroker.consumer.ws.model.*;
+package es.gob.csvbroker.consumer.ws.model;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -38,7 +36,7 @@ public interface CSVValidationWSService {
     @ResponseWrapper(localName = "csvValidationResponse", targetNamespace = "urn:es:gob:aapp:csvbroker:webservices:validation:v1.0", className = "es.gob.csvbroker.consumer.ws.model.CsvValidationResponse")
     public CSVValidationResponse csvValidation(
         @WebParam(name = "validationRequest", targetNamespace = "")
-                CSVValidationRequest validationRequest)
+        CSVValidationRequest validationRequest)
         throws CSVValidationException_Exception
     ;
 

@@ -2,7 +2,7 @@ package es.gob.csvbroker.consumer;
 
 import es.gob.csvbroker.consumer.model.ConsultarCsvRequest;
 import es.gob.csvbroker.consumer.model.ConsultarCsvResponse;
-import es.gob.csvbroker.consumer.ws.model.CsvBrokerConsumerException;
+import es.gob.csvbroker.consumer.model.CsvBrokerConsumerException;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
